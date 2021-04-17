@@ -4,12 +4,22 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const router = require('./routes');
+const cors = require('cors');
 const auth = require('./middlewares/auth');
 const { errors } = require('./middlewares/errors');
 
 const app = express();
 
 const { PORT = 3000 } = process.env;
+
+const corsOptions = {
+  origin: ['*'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type', 'origin', 'Authorization'],
+};
+app.use('*', cors(corsOptions));
 
 const { requestLogger, errorLogger } = require('./middlewares/errorlog');
 

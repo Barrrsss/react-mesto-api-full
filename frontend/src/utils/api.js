@@ -45,7 +45,7 @@ class Api {
     }
 
     addNewCard(item) {
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-19/cards`, {
+        return fetch(`https://krasnov.backendmesto.nomoredomains.club/cards`, {
             method: "POST",
             headers: this._headers,
             body: JSON.stringify({

@@ -172,7 +172,7 @@ function App() {
 
     //отрисовка лайков и запрос в api
     function handleCardLike(item) {
-        const isLiked = item.likes.some(i => i._id === currentUser._id);
+        const isLiked = item.likes.some(i => i === currentUser._id);
 
         api.changeLikeCardStatus(item._id, !isLiked).then((newCard) => {
             const newCards = cards.map((c) => c._id === item._id ? newCard : c);

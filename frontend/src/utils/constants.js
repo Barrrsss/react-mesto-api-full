@@ -11,7 +11,7 @@ export const validationConfig = {
 //идентификация для Api
 
 const options = {
-    url: 'http://localhost:3002/',
+    url: 'https://krasnov.backendmesto.nomoredomains.club/',
     headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',

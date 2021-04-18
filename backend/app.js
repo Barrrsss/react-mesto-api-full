@@ -1,16 +1,18 @@
 const express = require('express');
-require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const router = require('./routes');
 const cors = require('cors');
+const router = require('./routes');
 const auth = require('./middlewares/auth');
+require('dotenv').config();
 const { errors } = require('./middlewares/errors');
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3002 } = process.env;
+
+const { requestLogger, errorLogger } = require('./middlewares/errorlog');
 
 const corsOptions = {
   origin: '*',
@@ -23,8 +25,6 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
-
-const { requestLogger, errorLogger } = require('./middlewares/errorlog');
 
 app.use(bodyParser.json());
 

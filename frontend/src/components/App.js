@@ -62,8 +62,8 @@ function App() {
             auth.getContent(token)
                 .then(data => {
                     if (data) {
-                        setEmail(data.data.email);
-                        handleLoggedIn();
+                        setEmail(data.email);
+                        setLoggedIn(true);
                         history.push('/');
                     }
                 })

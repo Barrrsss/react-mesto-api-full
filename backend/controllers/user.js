@@ -2,12 +2,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFound = require('../errors/NotFound');
 const BadRequest = require('../errors/BadRequest');
 const ConflictingRequest = require('../errors/ConflictingRequest');
-const Unauthorized = require('../errors/Unauthorized');
 
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users))
@@ -97,19 +97,10 @@ const login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: 604800000 },
+        { expiresIn: '7d' },
       );
 
-      res
-        .cookie('jwt', token, {
-          maxAge: 604800000,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ message: 'Авторизация прошла успешно' });
-    })
-    .catch((err) => {
-      throw new Unauthorized(`Пользователь не авторизован + ${err.message}`);
+      res.send({ token });
     })
     .catch(next);
 };

@@ -13,13 +13,13 @@ function Card({item, onCardClick, onCardLike, onCardDelete}) {
         onCardDelete(item);
     }
     // Определяем, являемся ли мы владельцем текущей карточки
-    const isOwn = item.owner._id === currentUser._id;
+    const isOwn = item.owner === currentUser._id;
 
 // Создаём переменную, которую после зададим в `className` для кнопки удаления
     const cardDeleteButtonClassName = (
         `element__button-trash ${isOwn ? 'element__button-trash_visible' : ''}`
     );
-    const isLiked = item.likes.some(i => i._id === currentUser._id);
+    const isLiked = item.likes.some(i => i === currentUser._id);
     const cardLikeButtonClassName  = (
         `element__button-like ${isLiked ? 'element__button-like_active' : ''}`
     );

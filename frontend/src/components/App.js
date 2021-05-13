@@ -54,7 +54,7 @@ function App() {
                 })
         }
 
-    }, [loggedIn])
+    }, [loggedIn, email])
     //аутентификация и токен
     useEffect(() => {
         const token = localStorage.getItem('token');

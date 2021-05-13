@@ -21,7 +21,7 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deployment": "scp -r ./public/* barrrsss@130.193.58.107:/home/barrrsss/react-mesto-api-full/frontend/public"
+    "deployment": "scp -r ./public/* barrrsss@84.252.134.31:/home/barrrsss/react-mesto-api-full/frontend/public"
   },
   "eslintConfig": {
     "extends": [

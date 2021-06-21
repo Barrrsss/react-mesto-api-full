@@ -10,7 +10,7 @@ const { errors } = require('./middlewares/errors');
 
 const app = express();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const { requestLogger, errorLogger } = require('./middlewares/errorlog');
 
@@ -39,11 +39,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(requestLogger);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
 app.use(require('./routes/auth'));
 
 app.use(auth);

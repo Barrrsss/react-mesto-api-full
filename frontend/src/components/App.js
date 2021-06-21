@@ -39,22 +39,6 @@ function App() {
     //карточки
     const [selectedCard, setSelectedCard] = useState(false);
     const [cards, setCards] = useState([]);
-
-    //получаем информацию о карточках и пользователе
-    useEffect(() => {
-        if (loggedIn) {
-            api.getAllData()
-                .then((response => {
-                    const [userData, cardsData] = response;
-                    setCards(cardsData);
-                    setCurrentUser(userData);
-                }))
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
-
-    }, [loggedIn])
     //аутентификация и токен
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -73,6 +57,22 @@ function App() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [history]);
+    //получаем информацию о карточках и пользователе
+    useEffect(() => {
+        if (loggedIn) {
+            api.getAllData()
+                .then((response => {
+                    const [userData, cardsData] = response;
+                    setCards(cardsData);
+                    setCurrentUser(userData);
+                }))
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+
+    }, [loggedIn])
+
 
     //закрытие попапа по оверлею
     function handleOverlayClose(evt) {

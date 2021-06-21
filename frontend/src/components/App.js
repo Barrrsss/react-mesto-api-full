@@ -71,7 +71,7 @@ function App() {
                 })
         }
 
-    }, [loggedIn])
+    }, [loggedIn, email])
 
 
     //закрытие попапа по оверлею

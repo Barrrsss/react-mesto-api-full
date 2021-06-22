@@ -39,6 +39,22 @@ function App() {
     //карточки
     const [selectedCard, setSelectedCard] = useState(false);
     const [cards, setCards] = useState([]);
+    //получаем информацию о карточках и пользователе
+    useEffect(() => {
+        if (loggedIn) {
+            api.getAllData()
+                .then((response => {
+                    console.log(response)
+                    const [userData, cardsData] = response;
+                    setCards(cardsData);
+                    setCurrentUser(userData);
+                }))
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+
+    }, [loggedIn, email])
     //аутентификация и токен
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -56,22 +72,8 @@ function App() {
                 })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [history]);
-    //получаем информацию о карточках и пользователе
-    useEffect(() => {
-        if (loggedIn) {
-            api.getAllData()
-                .then((response => {
-                    const [userData, cardsData] = response;
-                    setCards(cardsData);
-                    setCurrentUser(userData);
-                }))
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
+    }, [email, loggedIn]);
 
-    }, [loggedIn, email])
 
 
     //закрытие попапа по оверлею
@@ -111,6 +113,7 @@ function App() {
         auth.authorize(password, email)
             .then(data => {
                 if (data.token) {
+                    console.log(data)
                     setEmail(email);
                     handleLoggedIn();
                     localStorage.setItem('token', data.token);

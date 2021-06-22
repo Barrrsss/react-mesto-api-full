@@ -24,7 +24,7 @@ function Main(props) {
             </section>
             <section className="elements">
                 <ul className="elements__list">
-                    {props.cards.map((item) => <Card key={item._id} item={item} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>)}
+                    {props.cards.slice(0).reverse().map((item) => <Card key={item._id} item={item} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>)}
                 </ul>
             </section>
         </main>
